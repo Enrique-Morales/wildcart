@@ -11,6 +11,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             $scope.usuariologeado = sessionService.getUserName();
             $scope.loginH = true;
             $scope.usuariologeadoID = sessionService.getId();
+            $scope.tipousuarioID = sessionService.getTypeUserID();
         }
 
         if (!$routeParams.order) {
