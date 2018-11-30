@@ -219,6 +219,12 @@ public class ServiceFactory {
                     case "empty":
                         oReplyBean = oCartService.empty();
                         break;
+                    case "buy":
+                        oReplyBean = oCartService.buy();
+                        break;
+                    case "update":
+                        oReplyBean = oCartService.update();
+                        break;
 
                     default:
                         oReplyBean = new ReplyBean(500, "Operation doesn't exist");

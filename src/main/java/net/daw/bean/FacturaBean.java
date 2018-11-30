@@ -141,7 +141,11 @@ public class FacturaBean {
         strColumns += "null,";
         strColumns += EncodingHelper.quotate(localDate.toString()) + ",";
         strColumns += iva + ",";
+        if (getObj_Usuario() != null) {
         strColumns += getObj_Usuario().getId();
+        } else {
+            strColumns += getId_usuario();
+        }
         return strColumns;
     }
 
