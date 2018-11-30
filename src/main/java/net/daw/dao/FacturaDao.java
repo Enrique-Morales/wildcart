@@ -95,15 +95,20 @@ public class FacturaDao {
     }
 
     public FacturaBean create(FacturaBean oFacturaBean) throws Exception {
-        String strSQL = "INSERT INTO " + ob + " (`id`, `fecha`, `iva`, `id_usuario`) VALUES (NULL, NULL,?,?);";
-        
+//        String strSQL = "INSERT INTO " + ob + " (`id`, `fecha`, `iva`, `id_usuario`) VALUES (NULL, NULL,?,?);";
+
+        String strSQL = "INSERT INTO " + ob;
+        strSQL += "(" + oFacturaBean.getColumns() + ")";
+        strSQL += " VALUES ";
+        strSQL += "(" + oFacturaBean.getValues() + ")";
+
         ResultSet oResultSet = null;
         PreparedStatement oPreparedStatement = null;
         try {
             oPreparedStatement = oConnection.prepareStatement(strSQL);
 //            oPreparedStatement.setDate(1, oFacturaBean.getFecha());
-            oPreparedStatement.setFloat(1, (float) oFacturaBean.getIva());
-            oPreparedStatement.setInt(2, oFacturaBean.getId_usuario());
+//            oPreparedStatement.setFloat(1, (float) oFacturaBean.getIva());
+//            oPreparedStatement.setInt(2, oFacturaBean.getId_usuario());
             oPreparedStatement.executeUpdate();
             oResultSet = oPreparedStatement.getGeneratedKeys();
             if (oResultSet.next()) {
@@ -112,7 +117,7 @@ public class FacturaDao {
                 oFacturaBean.setId(0);
             }
         } catch (SQLException e) {
-            throw new Exception("Error en Dao create de " + ob+"-------"+ e.getMessage(), e);
+            throw new Exception("Error en Dao create de " + ob + "-------" + e.getMessage(), e);
         } finally {
             if (oResultSet != null) {
                 oResultSet.close();
@@ -206,7 +211,7 @@ public class FacturaDao {
         return res;
     }
 
-    public ArrayList<FacturaBean> getpageXusuario(int iRpp, int iPage,HashMap<String, String> hmOrder, int idUsuario, Integer expand) throws Exception {
+    public ArrayList<FacturaBean> getpageXusuario(int iRpp, int iPage, HashMap<String, String> hmOrder, int idUsuario, Integer expand) throws Exception {
         String strSQL = "SELECT * FROM " + ob;
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         ArrayList<FacturaBean> alFacturaBean;

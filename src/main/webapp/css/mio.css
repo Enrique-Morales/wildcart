@@ -18,3 +18,42 @@
     margin:15px;
 }
 
+.orderIcons {
+    margin-left: 3px;
+    display:flex;
+    flex-direction: column;
+
+}
+
+.orderIcons a img {
+    width: 8px;
+}
+
+.cabecera {
+    background-color: red;
+    height: 45px;
+}
+
+/*.cabecera tr {
+    display:flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row
+}*/
+
+.cabecera th {
+    background-color: #124E78;
+    color: white;
+
+}
+
+.titulo {
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabla tr td, .tabla tr th {
+     vertical-align:middle;
+}
