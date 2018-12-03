@@ -6,6 +6,7 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
         $scope.totalPages = 1;
         $scope.select = ["5", "10", "25", "50", "500"];
         $scope.ob = "producto";
+        $scope.cantidad = 1;
 
         if (sessionService) {
             $scope.usuariologeado = sessionService.getUserName();
@@ -58,6 +59,17 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             ;
             $location.url($scope.ob + "/plist/" + $scope.rpp + "/" + $scope.page + "/" + $scope.orderURLCliente);
         };
+
+        $(document).ready(function () {
+            $("input").keyup(function () {
+                if ($("input").val() > $scope.cantidad) {
+                    $("input").val($scope.cantidad);
+                }
+
+            });
+        });
+
+
 
         //getcount
         $http({
@@ -120,6 +132,37 @@ moduleProducto.controller('productoPlistController', ['$scope', '$http', '$locat
             }
         }
         ;
+
+        $scope.validar = function (val, existencias, id) {
+
+            if (val == undefined) {
+                var sQuery = "#" + id + "cant";
+                $(sQuery).val(existencias);
+            }
+
+        }
+
+        $scope.add = function (id) {
+
+            var sQuery = "#" + id + "cant";
+
+            var cantidadProducto = $(sQuery).val();
+
+            $http({
+                method: 'GET',
+            header: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+                url: '/json?ob=cart&op=add&prod=' + id + '&cant=' + cantidadProducto
+            }).then(function (response) {
+                $scope.status = response.status;
+                $location.url('cart/show');
+            }, function (response) {
+                $scope.status = response.status;
+                $scope.ajaxDataProductos = response.data.message || 'Request failed';
+            });
+
+        }
 
         $scope.isActive = toolService.isActive;
     }

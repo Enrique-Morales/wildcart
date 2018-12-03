@@ -1,16 +1,75 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<header ng-include="'js/app/header.html'"></header>
+<div class="container-fluid">
+    <div class="row">
+        <main role="main" class="col-md-9 col-lg-12" style="margin-top: 50px">
+                <h1 class="h2" style="margin-top: 40px;"><i class="fa fa-shopping-cart"></i> Cesta</h1>
+                <h3 ng-show="!comprado">Elementos: {{totalCart}}</h3>
+
+   
+        </main>
+    </div>
+
+
+    <div class="table-responsive" style="text-align: center;" ng-show="!comprado">
+        <table class="table table-striped table-sm tabla">
+            <tr class="cabecera">            
+                <th style="min-width: 95px;"> 
+                    <div class="titulo">
+                    <div>ID</div>
+                    </div>
+                    </th>     
+
+                <th>
+                    <div class="titulo">
+                        <div>Código</div>
+                    </div>
+                </th>
+                <th>
+                    <div class="titulo">
+                        <div>Descripción</div>
+                    </div>
+                </th>
+                <th>
+                    <div class="titulo">
+                        <div>Precio</div>
+                    </div>
+                </th>
+                <th>
+                    <div class="titulo">
+                        <div>Cantidad</div>
+                    </div>
+                </th>
+                <th>
+                    <div class="titulo">
+                        <div>Total  &#8364;</div>
+                    </div>
+                </th>
+                <th>
+                    Acciones                
+                </th>
+            </tr>
+            
+
+
+            <tr ng-repeat="fila in ajaxDataUsuarios track by $index">
+                <td>{{fila.obj_producto.id}}</td>
+                <td>{{fila.obj_producto.codigo}}</td>
+                <td>{{fila.obj_producto.desc}}</td>
+                <td>{{fila.obj_producto.precio.toFixed(2)}} &#8364;</td>
+                <td><input type="number" class="form-control" ng-model="cantid" ng-change="validarCantidad(cantid, fila.obj_producto.existencias, fila.obj_producto.id)" ng-keyup="validar(cantid, fila.obj_producto.existencias, fila.obj_producto.id)" name="cant" id="{{fila.obj_producto.id}}cant" value="{{fila.cantidad}}" min="1" max="{{fila.obj_producto.existencias}}" style="width:80px"></td>
+                <td>{{(fila.cantidad*fila.obj_producto.precio).toFixed(2)}} &#8364;</td>
+                <td> 
+
+                    <button style="font-size:15px" class="btn btn-outline-dark" ng-click="eliminar(fila.obj_producto.id,fila.cantidad*fila.obj_producto.precio)"><i class="fa fa-trash-alt"></i></button>
+                </td>                                  
+            </tr>
+        </table>
+    </div>
+    <div class="container" ng-show="!comprado">
+            <div class="totalPagar"><span class="totalPagarTexto">Total a pagar: {{precioTotal.toFixed(2)}} &#8364;</span>&nbsp;
+        <button type="button" class="btn btn-success" ng-click="buy()"><i class="fa fa-cart-arrow-down" style="font-size:24px"></i></button>
+        </div>
+    </div>
+    <div ng-show="comprado" class="alert alert-success">Tu pedido ha sido efectuado correctamente y ya está en camino.</div>
+</div>
+<footer class="footer" ng-include="'js/app/footer.html'"></footer>

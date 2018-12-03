@@ -2,7 +2,7 @@ wildcart.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {templateUrl: 'js/app/common/home.html', controller: 'homeController'});
         $routeProvider.when('/home', {templateUrl: 'js/app/common/home.html', controller: 'homeController'});
         
-        $routeProvider.when('/cart/show', {templateUrl: 'js/app/cart/show.html', controller: 'showController'});
+        $routeProvider.when('/cart/show', {templateUrl: 'js/app/cart/show.html', controller: 'cartShowController'});
         
         $routeProvider.when('/tipousuario/plist', {templateUrl: 'js/app/tipousuario/plist.html', controller: 'tipousuarioPlistController'});
         $routeProvider.when('/tipousuario/plist/:rpp?/:page?/:order?', {templateUrl: 'js/app/tipousuario/plist.html', controller: 'tipousuarioPlistController'});

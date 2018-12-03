@@ -294,7 +294,7 @@ public class CartService {
             cart.clear();
             sesion.setAttribute("cart", cart);
 
-            oReplyBean = new ReplyBean(200, "Factura nÂº " + id_factura + " creada con Ã©xito");
+            oReplyBean = new ReplyBean(200, EncodingHelper.quotate("Factura nº " + id_factura + " creada con éxito"));
 
         } catch (Exception e) {
 

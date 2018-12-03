@@ -58,3 +58,51 @@
 .tabla tr td, .tabla tr th {
      vertical-align:middle;
 }
+
+.tablaprod {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+}
+
+.prod {
+    width:200px;
+    border: 1px solid orange;
+    margin-bottom: 20px;
+    border-radius:8px;
+}
+
+.precio {
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 5px;
+}
+
+.nombreprod {
+    background-color: #3F88C5;
+    color:white;
+    border-radius:8px 8px 0px 0px;
+    display:flex;
+    height:60px;
+}
+
+.botoneraProd {
+    display: flex;
+    justify-content: space-between;
+    padding:5px;
+}
+
+.totalPagar {
+    
+    display:flex;
+    justify-content: flex-end;
+    
+    
+}
+
+.totalPagarTexto {
+    background-color: #E9C46A;
+    padding:10px;
+}
