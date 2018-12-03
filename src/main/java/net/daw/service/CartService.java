@@ -265,7 +265,7 @@ public class CartService {
 
             for (ItemBean ib : cart) {
 
-                //CREAMOS LA LÍNEA
+                //CREAMOS LA LINEA
                 int cant = ib.getCantidad();
 
                 oLineaBean = new LineaBean();

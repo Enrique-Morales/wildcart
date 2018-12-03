@@ -50,6 +50,9 @@ public class json extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        response.setContentType("application/json;charset=UTF-8");
+        
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
         response.setHeader("Access-Control-Allow-Methods", "GET,POST");
         response.setHeader("Access-Control-Max-Age", "86400");

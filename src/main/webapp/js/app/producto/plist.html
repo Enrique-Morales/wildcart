@@ -94,7 +94,7 @@
                 <td>{{fila.codigo}}</td>
                 <td>{{fila.desc}}</td>
                 <td>{{fila.existencias}}</td>
-                <td>{{fila.precio.toFixed(2)}}</td>
+                <td>{{fila.precio.toFixed(2)}} &#8364;</td>
                 <td>{{fila.foto}}</td>                
                 <td>                    
                     <a href="tipoproducto/view/{{fila.obj_tipoProducto.id}}">{{fila.obj_tipoProducto.desc}}</a>
@@ -103,10 +103,10 @@
                     <a  href="{{ob}}/view/{{fila.id}}"> 
                         <button style="font-size:15px" class="btn btn-outline-dark"><i class="fa fa-eye"></i></button>
                     </a> 
-                    <a  href="{{ob}}/edit/{{fila.id}}" ng-show="tipousuarioID==3"> 
+                    <a  href="{{ob}}/edit/{{fila.id}}" ng-show="tipousuarioID==5"> 
                         <button style="font-size:15px" class="btn btn-outline-dark"><i class="fa fa-edit"></i></button>
                     </a> 
-                    <a  href="{{ob}}/remove/{{fila.id}}" ng-show="tipousuarioID==3"> 
+                    <a  href="{{ob}}/remove/{{fila.id}}" ng-show="tipousuarioID==5"> 
                         <button style="font-size:15px" class="btn btn-outline-dark"><i class="fa fa-trash-alt"></i></button>
                     </a> 
                 </td>                                  
