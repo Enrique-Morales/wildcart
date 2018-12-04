@@ -116,40 +116,42 @@ moduleCart.controller('cartShowController', ['$scope', '$http', '$location', 'to
 //        }
 //        ;
 
-        $scope.validar = function (val, existencias, id) {
-            var diferencia;
-            if (val == undefined) {
-
-                var sQuery = "#" + id + "cant";
-                $(sQuery).val(1);
-                $scope.ajaxDataUsuarios.forEach(function (element) {
-                    if (element.obj_producto.id == id) {
-                        diferencia = 1 - element.cantidad;
-
-                        element.cantidad = 1;
-                        $scope.precioTotal += diferencia * element.obj_producto.precio;
-                    }
-                });
-            } else {
-                $scope.ajaxDataUsuarios.forEach(function (element) {
-                    if (element.obj_producto.id == id) {
-                        diferencia = val - element.cantidad;
+//        $scope.validar = function (val, existencias, id) {
+//            var diferencia;
+//            if (val == undefined) {
+//
+//                var sQuery = "#" + id + "cant";
+//                $(sQuery).val(existencias);
+//                $scope.ajaxDataUsuarios.forEach(function (element) {
+//                    if (element.obj_producto.id == id) {
+//                        diferencia = 1 - element.cantidad;
+//
+//                        element.cantidad = 1;
+//                        $scope.precioTotal += diferencia * element.obj_producto.precio;
+//                    }
+//                });
+//            } else {
+//                $scope.ajaxDataUsuarios.forEach(function (element) {
+//                    if (element.obj_producto.id == id) {
+//                        diferencia = val - element.cantidad;
 //                        element.cantidad=val;
-                        $scope.precioTotal += diferencia * element.obj_producto.precio;
-                    }
-                });
-            }
-
-        }
+//                        $scope.precioTotal += diferencia * element.obj_producto.precio;
+//                    }
+//                });
+//            }
+//
+//        }
 
         $scope.validarCantidad = function (val, existencias, id) {
             var diferencia;
+            var cantidadFinal;
             if (val == undefined) {
                 var sQuery = "#" + id + "cant";
-                $(sQuery).val(1);
+                $(sQuery).val(existencias);
                 $scope.ajaxDataUsuarios.forEach(function (element) {
                     if (element.obj_producto.id == id) {
                         diferencia = 1 - element.cantidad;
+                        cantidadFinal= 1;
                         element.cantidad = 1;
                         $scope.precioTotal += diferencia * element.obj_producto.precio;
                     }
@@ -158,11 +160,27 @@ moduleCart.controller('cartShowController', ['$scope', '$http', '$location', 'to
                 $scope.ajaxDataUsuarios.forEach(function (element) {
                     if (element.obj_producto.id == id) {
                         diferencia = val - element.cantidad;
+                        cantidadFinal= val;
                         element.cantidad = val;
                         $scope.precioTotal += diferencia * element.obj_producto.precio;
                     }
                 });
             }
+            
+            $http({
+                method: 'GET',
+                header: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                url: '/json?ob=' + $scope.ob + '&op=update&prod=' + id + '&cant=' + cantidadFinal
+            }).then(function (response) {
+                $scope.status = response.status;
+
+            }, function (response) {
+                $scope.status = response.status;
+                $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+            });
+            
         }
 
         $scope.eliminar = function (id, precio) {
@@ -191,43 +209,43 @@ moduleCart.controller('cartShowController', ['$scope', '$http', '$location', 'to
 
         $scope.buy = function () {
 
-            $scope.ajaxDataUsuarios.forEach(function (element) {
+//            $scope.ajaxDataUsuarios.forEach(function (element) {
+//
+//                var sQuery = "#" + element.obj_producto.id + "cant";
+//                element.cantidad = $(sQuery).val();
+//
+//            });
+//
+//            carrito.forEach(function (element) {
+//
+//                var sQuery = "#" + element.obj_producto.id + "cant";
+//                var cantidadInput = $(sQuery).val();
+//
+//                if (element.cantidad != cantidadInput) {
+//
+//                $http({
+//                method: 'GET',
+//                header: {
+//                    'Content-Type': 'application/json;charset=utf-8'
+//                },
+//                url: '/json?ob=' + $scope.ob + '&op=update&prod=' + element.obj_producto.id + '&cant=' + cantidadInput
+//            }).then(function (response) {
+//                $scope.status = response.status;
+//
+//            }, function (response) {
+//                $scope.status = response.status;
+//                $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
+//            });
+//
+//                }
+//
+//            });
 
-                var sQuery = "#" + element.obj_producto.id + "cant";
-                element.cantidad = $(sQuery).val();
-
-            });
-
-            carrito.forEach(function (element) {
-
-                var sQuery = "#" + element.obj_producto.id + "cant";
-                var cantidadInput = $(sQuery).val();
-
-                if (element.cantidad != cantidadInput) {
-
-                $http({
+            $http({
                 method: 'GET',
                 header: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                url: '/json?ob=' + $scope.ob + '&op=update&prod=' + element.obj_producto.id + '&cant=' + cantidadInput
-            }).then(function (response) {
-                $scope.status = response.status;
-
-            }, function (response) {
-                $scope.status = response.status;
-                $scope.ajaxDataUsuarios = response.data.message || 'Request failed';
-            });
-
-                }
-
-            });
-
-            $http({
-                method: 'GET',
-//                header: {
-//                    'Content-Type': 'application/json;charset=utf-8'
-//                },
                 url: '/json?ob=' + $scope.ob + '&op=buy'
             }).then(function (response) {
                 $scope.status = response.status;

@@ -92,6 +92,8 @@
     display: flex;
     justify-content: space-between;
     padding:5px;
+    background-color: #D3D0CB;
+    border-radius:0px 0px 8px 8px;
 }
 
 .totalPagar {
@@ -105,4 +107,9 @@
 .totalPagarTexto {
     background-color: #E9C46A;
     padding:10px;
+}
+
+.cantidadShowCart {
+    display:flex;
+    justify-content: center;
 }

@@ -56,7 +56,7 @@
                 <td>{{fila.obj_producto.codigo}}</td>
                 <td>{{fila.obj_producto.desc}}</td>
                 <td>{{fila.obj_producto.precio.toFixed(2)}} &#8364;</td>
-                <td><input type="number" class="form-control" ng-model="cantid" ng-change="validarCantidad(cantid, fila.obj_producto.existencias, fila.obj_producto.id)" ng-keyup="validar(cantid, fila.obj_producto.existencias, fila.obj_producto.id)" name="cant" id="{{fila.obj_producto.id}}cant" value="{{fila.cantidad}}" min="1" max="{{fila.obj_producto.existencias}}" style="width:80px"></td>
+                <td class="cantidadShowCart"><input type="number" class="form-control" ng-model="cantid" ng-change="validarCantidad(cantid, fila.obj_producto.existencias, fila.obj_producto.id)" ng-keyup="validarCantidad(cantid, fila.obj_producto.existencias, fila.obj_producto.id)" name="cant" id="{{fila.obj_producto.id}}cant" value="{{fila.cantidad}}" min="1" max="{{fila.obj_producto.existencias}}" style="width:80px"></td>
                 <td>{{(fila.cantidad*fila.obj_producto.precio).toFixed(2)}} &#8364;</td>
                 <td> 
 
@@ -70,6 +70,7 @@
         <button type="button" class="btn btn-success" ng-click="buy()"><i class="fa fa-cart-arrow-down" style="font-size:24px"></i></button>
         </div>
     </div>
-    <div ng-show="comprado" class="alert alert-success">Tu pedido ha sido efectuado correctamente y ya está en camino.</div>
+    <div class="container">
+    <div ng-show="comprado" class="alert alert-success">Tu pedido ha sido efectuado correctamente y ya está en camino.</div></div>
 </div>
 <footer class="footer" ng-include="'js/app/footer.html'"></footer>

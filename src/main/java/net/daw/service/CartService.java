@@ -99,6 +99,8 @@ public class CartService {
                 Integer cantidad = cart.get(indice).getCantidad() + cant;
                 if (existencias > cantidad) {
                     cart.get(indice).setCantidad(cantidad);
+                } else {
+                    cart.get(indice).setCantidad(existencias);
                 }
             }
             
@@ -108,7 +110,7 @@ public class CartService {
             oReplyBean = new ReplyBean(200, oGson.toJson(cart));
             
             } else {
-                oReplyBean = new ReplyBean(500, EncodingHelper.quotate("Error en cart Service: no puede añadir menos de 1 producto"));
+                oReplyBean = new ReplyBean(500, EncodingHelper.quotate("Error en cart Service: no puede aÃ±adir menos de 1 producto"));
             }
             
 
@@ -302,7 +304,7 @@ public class CartService {
             cart.clear();
             sesion.setAttribute("cart", cart);
 
-            oReplyBean = new ReplyBean(200, EncodingHelper.quotate("Factura nº " + id_factura + " creada con éxito"));
+            oReplyBean = new ReplyBean(200, EncodingHelper.quotate("Factura nÂº " + id_factura + " creada con Ã©xito"));
 
         } catch (Exception e) {
 
