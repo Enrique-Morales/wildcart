@@ -74,7 +74,9 @@ public class CartService {
                     break;
                 }
             }
+            
             ItemBean oItemBean = new ItemBean();
+            if (cant >0) {
             if (indice == -1) {
                 //Si es -1 es porque voy a registrar
                 if (existencias >= 1 && existencias > cant) {
@@ -99,14 +101,20 @@ public class CartService {
                     cart.get(indice).setCantidad(cantidad);
                 }
             }
+            
             //Actualizamos la sesion del carrito de compras
             sesion.setAttribute("cart", cart);
 
             oReplyBean = new ReplyBean(200, oGson.toJson(cart));
+            
+            } else {
+                oReplyBean = new ReplyBean(500, EncodingHelper.quotate("Error en cart Service: no puede añadir menos de 1 producto"));
+            }
+            
 
         } catch (Exception ex) {
 //            Logger.getLogger(CartService.class.getName()).log(Level.SEVERE, null, ex);
-            oReplyBean = new ReplyBean(500, "Error en add CartService: " + ex.getMessage());
+            oReplyBean = new ReplyBean(500, EncodingHelper.quotate("Error en add CartService: " + ex.getMessage()));
         } finally {
             oConnectionPool.disposeConnection();
         }
@@ -151,7 +159,7 @@ public class CartService {
             oReplyBean = new ReplyBean(200, oGson.toJson(cart));
 
         } catch (Exception e) {
-            oReplyBean = new ReplyBean(500, "Error en update CartService: " + e.getMessage());
+            oReplyBean = new ReplyBean(500, EncodingHelper.quotate("Error en update CartService: " + e.getMessage()));
         } finally {
             oConnectionPool.disposeConnection();
         }
@@ -188,7 +196,7 @@ public class CartService {
 
         } catch (Exception ex) {
 //            Logger.getLogger(CartService.class.getName()).log(Level.SEVERE, null, ex);
-            oReplyBean = new ReplyBean(500, "Error en reduce CartService: " + ex.getMessage());
+            oReplyBean = new ReplyBean(500, EncodingHelper.quotate("Error en reduce CartService: " + ex.getMessage()));
         }
         return oReplyBean;
     }
@@ -210,7 +218,7 @@ public class CartService {
 
 //            oReplyBean = new ReplyBean(200, oGson.toJson(cart));
         } catch (Exception e) {
-            oReplyBean = new ReplyBean(500, "Error en add CartService: " + e.getMessage());
+            oReplyBean = new ReplyBean(500, EncodingHelper.quotate("Error en add CartService: " + e.getMessage()));
         }
 
         return oReplyBean;
@@ -304,7 +312,7 @@ public class CartService {
 
             }
 
-            oReplyBean = new ReplyBean(500, "Error en buy CartService: " + e.getMessage());
+            oReplyBean = new ReplyBean(500, EncodingHelper.quotate("Error en buy CartService: " + e.getMessage()));
         } finally {
             oConnectionPool.disposeConnection();
         }
